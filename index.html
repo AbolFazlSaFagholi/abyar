@@ -1,87 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#176b45">
-  <title>تیپ‌آگرو | فروشگاه تجهیزات آبیاری</title>
-  <meta name="description" content="نسخه نمایشی فروشگاه تیپ‌آگرو؛ تجهیزات آبیاری و کشاورزی">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#145b3b"><title>تیپ‌آگرو | فروشگاه تجهیزات آبیاری</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="topbar">🚚 ارسال آزمایشی سفارش‌ها | پشتیبانی: ۰۲۱-۱۲۳۴۵۶۷۸</div>
-  <header class="site-header">
-    <a class="brand" href="#" aria-label="تیپ‌آگرو">
-      <span class="brand-mark">🌱</span>
-      <span><strong>تیپ‌آگرو</strong><small>راهکار هوشمند آبیاری</small></span>
-    </a>
-    <nav class="desktop-nav">
-      <a href="#products">محصولات</a><a href="#benefits">چرا تیپ‌آگرو؟</a><a href="#contact">تماس با ما</a>
-    </nav>
-    <div class="header-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="جستجو">⌕</button>
-      <button class="cart-btn" id="cartOpen">سبد خرید <span id="cartCount">۰</span></button>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow">فروشگاه تجهیزات آبیاری و کشاورزی</span>
-        <h1>آبیاری بهتر،<br><em>برداشت پربارتر</em></h1>
-        <p>تجهیزات کاربردی آبیاری را برای مزرعه، باغ و گلخانه در یک جا پیدا کن.</p>
-        <div class="hero-actions"><a class="primary-btn" href="#products">مشاهده محصولات <span>←</span></a><a class="text-btn" href="#benefits">بیشتر بدانید</a></div>
-        <div class="hero-stats"><div><b>+۱۲۰</b><span>محصول متنوع</span></div><div><b>کیفیت</b><span>انتخاب مطمئن</span></div><div><b>پشتیبانی</b><span>کنار کشاورز</span></div></div>
-      </div>
-      <div class="hero-art" aria-label="تصویرسازی گیاه و آبیاری">
-        <div class="sun"></div><div class="circle circle-one"></div><div class="circle circle-two"></div>
-        <div class="plant plant-one"><i></i><i></i><i></i><i></i><b></b></div>
-        <div class="plant plant-two"><i></i><i></i><i></i><b></b></div>
-        <div class="water-drop">💧</div><div class="hero-label">آب کمتر، بهره‌وری بیشتر</div>
-      </div>
-    </section>
-
-    <section class="trust-strip" id="benefits">
-      <div><span>✓</span><p><b>انتخاب هوشمند</b><small>محصولات مناسب نیاز شما</small></p></div>
-      <div><span>♧</span><p><b>مناسب باغ و مزرعه</b><small>راهکارهای کاربردی آبیاری</small></p></div>
-      <div><span>↗</span><p><b>خرید آسان</b><small>سبد خرید آزمایشی آنلاین</small></p></div>
-    </section>
-
-    <section class="products-section" id="products">
-      <div class="section-heading">
-        <div><span class="eyebrow">محصولات منتخب</span><h2>تجهیزات مورد نیازت را پیدا کن</h2><p>این محصولات نمونه هستند و قیمت‌ها صرفاً نمایشی‌اند.</p></div>
-        <label class="search-box" id="searchBox"><span>⌕</span><input id="searchInput" type="search" placeholder="جستجوی محصول..." aria-label="جستجوی محصول"></label>
-      </div>
-      <div class="filters" id="filters">
-        <button class="filter active" data-category="همه">همه محصولات</button>
-        <button class="filter" data-category="لوله و اتصالات">لوله و اتصالات</button>
-        <button class="filter" data-category="آبیاری قطره‌ای">آبیاری قطره‌ای</button>
-        <button class="filter" data-category="ابزار و تجهیزات">ابزار و تجهیزات</button>
-      </div>
-      <div class="product-grid" id="productGrid"></div>
-    </section>
-
-    <section class="banner">
-      <div><span class="eyebrow">برای زمینت انتخاب کن</span><h2>هر قطره آب، یک فرصت است.</h2><p>با انتخاب تجهیزات مناسب، مدیریت آبیاری را ساده‌تر کن.</p></div>
-      <a href="#products" class="light-btn">دیدن محصولات <span>←</span></a>
-      <div class="banner-leaf">🌿</div>
-    </section>
-
-    <section class="newsletter" id="contact">
-      <div><h2>از تیپ‌آگرو باخبر بمان</h2><p>برای تست رابط کاربری، ایمیلت را وارد کن؛ ارسال واقعی انجام نمی‌شود.</p></div>
-      <form id="newsletterForm"><input type="email" placeholder="ایمیل شما" required aria-label="ایمیل شما"><button class="primary-btn" type="submit">عضویت آزمایشی</button></form>
-    </section>
-  </main>
-
-  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">🌱</span><span><strong>تیپ‌آگرو</strong><small>راهکار هوشمند آبیاری</small></span></a><p>© ۱۴۰۵ تیپ‌آگرو — نسخه نمایشی برای GitHub Pages</p><span class="demo-tag">نسخه آزمایشی</span></footer>
-
-  <div class="overlay" id="overlay"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-label="سبد خرید" aria-hidden="true">
-    <div class="drawer-head"><div><span class="eyebrow">سفارش شما</span><h2>سبد خرید</h2></div><button id="cartClose" class="close-btn" aria-label="بستن">×</button></div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-bottom"><div class="total-row"><span>مبلغ کل</span><strong id="cartTotal">۰ تومان</strong></div><button class="primary-btn checkout-btn" id="checkoutBtn">ادامه ثبت سفارش</button><small>پرداخت و ثبت سفارش در این نسخه واقعی نیست.</small></div>
-  </aside>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="script.js"></script>
-</body>
-</html>
+<div class="announce">🌱 تیپ‌آگرو؛ همراه هوشمند کشاورزی <span>نسخه نمایشی — پرداخت واقعی فعال نیست</span></div>
+<header class="header">
+ <a class="brand" href="#"><span class="logo">🌿</span><span><b>تیپ‌آگرو</b><small>تجهیزات آبیاری و کشاورزی</small></span></a>
+ <nav><a href="#home">خانه</a><a href="#products">فروشگاه</a><a href="#about">درباره ما</a><a href="#contact">تماس</a></nav>
+ <div class="head-actions"><button class="outline" id="accountBtn">ورود / ثبت‌نام</button><button class="cart-button" id="cartBtn">🛒 سبد خرید <b id="cartCount">۰</b></button><button class="menu-btn" id="menuBtn">☰</button></div>
+</header>
+<div class="mobile-menu hidden" id="mobileMenu"><a href="#home">خانه</a><a href="#products">فروشگاه</a><a href="#about">درباره ما</a><a href="#contact">تماس</a><button id="adminOpenMobile">پنل مدیریت نمایشی</button></div>
+<main>
+<section class="hero" id="home"><div class="hero-copy"><span class="kicker">راهکارهای نوین آبیاری</span><h1>برای رشد بهتر،<br><em>هوشمندانه آبیاری کن.</em></h1><p>تجهیزات آبیاری قطره‌ای، لوله و اتصالات و ابزارهای کاربردی برای باغ، مزرعه و گلخانه.</p><div class="hero-buttons"><a class="btn primary" href="#products">مشاهده محصولات ←</a><button class="btn pale" id="heroLogin">حساب کاربری من</button></div><div class="stats"><div><b>۸+</b><small>محصول نمونه</small></div><div><b>۳ دسته</b><small>تجهیزات متنوع</small></div><div><b>ساده و سریع</b><small>خرید آزمایشی</small></div></div></div>
+<div class="hero-visual"><div class="sun"></div><div class="orbit"></div><div class="big-leaf">🌱</div><div class="drop">💧</div><div class="hero-note">هر قطره، ارزشمند است</div><div class="soil"></div></div></section>
+<section class="benefits" id="about"><div><i>✓</i><span><b>انتخاب آسان</b><small>جستجو و دسته‌بندی محصولات</small></span></div><div><i>♧</i><span><b>مناسب کشاورزی</b><small>نمونه تجهیزات آبیاری</small></span></div><div><i>↗</i><span><b>سفارش مرحله‌ای</b><small>سبد خرید و ثبت سفارش نمایشی</small></span></div></section>
+<section class="shop section" id="products"><div class="section-head"><div><span class="kicker">فروشگاه تیپ‌آگرو</span><h2>محصول مناسب زمینت را پیدا کن</h2><p>محصولات و قیمت‌ها نمونه هستند؛ از پنل نمایشی می‌توانی محصولات را مدیریت کنی.</p></div><div class="search"><span>⌕</span><input id="search" placeholder="نام محصول را جستجو کن..." aria-label="جستجوی محصول"></div></div>
+<div class="shop-controls"><div class="chips" id="categories"><button class="chip active" data-cat="همه">همه</button><button class="chip" data-cat="آبیاری قطره‌ای">آبیاری قطره‌ای</button><button class="chip" data-cat="لوله و اتصالات">لوله و اتصالات</button><button class="chip" data-cat="ابزار و تجهیزات">ابزار و تجهیزات</button></div><select id="sort" aria-label="مرتب‌سازی"><option value="default">مرتب‌سازی پیش‌فرض</option><option value="low">ارزان‌ترین</option><option value="high">گران‌ترین</option></select></div>
+<div class="products" id="productsGrid"></div></section>
+<section class="promo"><div><span class="kicker light">برای باغ و مزرعه</span><h2>آبیاری بهتر، مدیریت آسان‌تر.</h2><p>محصولات مناسب را انتخاب کن و سفارش آزمایشی خودت را ثبت کن.</p></div><a class="btn white" href="#products">شروع خرید ←</a><span class="promo-leaf">🌿</span></section>
+<section class="contact section" id="contact"><div><span class="kicker">همراه شما هستیم</span><h2>با تیپ‌آگرو در ارتباط باش</h2><p>فرم تماس در این نسخه صرفاً نمایشی است و اطلاعاتی به سرور ارسال نمی‌شود.</p></div><form id="contactForm"><input required placeholder="نام شما"><input required type="email" placeholder="ایمیل"><textarea required placeholder="پیام شما"></textarea><button class="btn primary">ارسال آزمایشی پیام</button></form></section>
+</main>
+<footer><a class="brand" href="#"><span class="logo">🌿</span><span><b>تیپ‌آگرو</b><small>تجهیزات آبیاری و کشاورزی</small></span></a><p>© ۱۴۰۵ تیپ‌آگرو — نسخه نمایشی GitHub Pages</p><button class="admin-link" id="adminOpen">⚙ پنل مدیریت نمایشی</button></footer>
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="cartDrawer" aria-hidden="true"><div class="drawer-head"><div><span class="kicker">سبد خرید شما</span><h2>سبد خرید</h2></div><button class="close" data-close>×</button></div><div class="drawer-content" id="cartContent"></div><div class="drawer-foot"><div class="total"><span>جمع کل</span><b id="cartTotal">۰ تومان</b></div><button class="btn primary full" id="checkout">ادامه و ثبت سفارش</button><small>پرداخت اینترنتی در این نسخه فعال نیست.</small></div></aside>
+<div class="modal-wrap" id="accountModal"><div class="modal"><button class="close modal-close" data-close>×</button><div class="modal-tabs"><button class="tab active" data-tab="login">ورود</button><button class="tab" data-tab="register">ثبت‌نام</button></div><div id="authContent"></div><p class="hint">این ورود فقط در همین مرورگر آزمایشی است و احراز هویت امن واقعی نیست.</p></div></div>
+<div class="modal-wrap" id="checkoutModal"><div class="modal wide"><button class="close modal-close" data-close>×</button><span class="kicker">مرحله آخر</span><h2>اطلاعات سفارش</h2><form id="checkoutForm" class="form-grid"><label>نام و نام خانوادگی<input name="name" required placeholder="مثلاً علی احمدی"></label><label>شماره تماس<input name="phone" required inputmode="tel" placeholder="09xxxxxxxxx"></label><label class="span2">نشانی کامل<textarea name="address" required placeholder="استان، شهر، خیابان، پلاک..."></textarea></label><label class="span2">توضیحات سفارش (اختیاری)<textarea name="note" placeholder="توضیحات تکمیلی"></textarea></label><div class="span2"><button class="btn primary full">ثبت سفارش آزمایشی</button></div></form><p class="hint">این فرم سفارش را فقط در حافظه مرورگر ذخیره می‌کند؛ پرداختی انجام نمی‌شود.</p></div></div>
+<div class="modal-wrap" id="adminModal"><div class="modal admin-modal"><button class="close modal-close" data-close>×</button><div class="admin-title"><span class="kicker">مدیریت فروشگاه</span><h2>پنل مدیریت نمایشی</h2><p>برای نمایش قابلیت‌ها رمز واقعی وجود ندارد؛ این پنل را در سایت عمومی امن فرض نکن.</p></div><div class="admin-tabs"><button class="tab active" data-admin="dashboard">نمای کلی</button><button class="tab" data-admin="products">محصولات</button><button class="tab" data-admin="orders">سفارش‌ها</button><button class="tab" data-admin="users">کاربران</button></div><div id="adminContent"></div></div></div>
+<div class="toast" id="toast"></div><div class="loading" id="loading"><div class="spinner"></div><b>تیپ‌آگرو</b><small>در حال آماده‌سازی فروشگاه...</small></div>
+<script src="script.js"></script>
+</body></html>
