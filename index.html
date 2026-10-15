@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176b45">
+  <title>تیپ‌آگرو | فروشگاه تجهیزات آبیاری</title>
+  <meta name="description" content="نسخه نمایشی فروشگاه تیپ‌آگرو؛ تجهیزات آبیاری و کشاورزی">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar">🚚 ارسال آزمایشی سفارش‌ها | پشتیبانی: ۰۲۱-۱۲۳۴۵۶۷۸</div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="تیپ‌آگرو">
+      <span class="brand-mark">🌱</span>
+      <span><strong>تیپ‌آگرو</strong><small>راهکار هوشمند آبیاری</small></span>
+    </a>
+    <nav class="desktop-nav">
+      <a href="#products">محصولات</a><a href="#benefits">چرا تیپ‌آگرو؟</a><a href="#contact">تماس با ما</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="جستجو">⌕</button>
+      <button class="cart-btn" id="cartOpen">سبد خرید <span id="cartCount">۰</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">فروشگاه تجهیزات آبیاری و کشاورزی</span>
+        <h1>آبیاری بهتر،<br><em>برداشت پربارتر</em></h1>
+        <p>تجهیزات کاربردی آبیاری را برای مزرعه، باغ و گلخانه در یک جا پیدا کن.</p>
+        <div class="hero-actions"><a class="primary-btn" href="#products">مشاهده محصولات <span>←</span></a><a class="text-btn" href="#benefits">بیشتر بدانید</a></div>
+        <div class="hero-stats"><div><b>+۱۲۰</b><span>محصول متنوع</span></div><div><b>کیفیت</b><span>انتخاب مطمئن</span></div><div><b>پشتیبانی</b><span>کنار کشاورز</span></div></div>
+      </div>
+      <div class="hero-art" aria-label="تصویرسازی گیاه و آبیاری">
+        <div class="sun"></div><div class="circle circle-one"></div><div class="circle circle-two"></div>
+        <div class="plant plant-one"><i></i><i></i><i></i><i></i><b></b></div>
+        <div class="plant plant-two"><i></i><i></i><i></i><b></b></div>
+        <div class="water-drop">💧</div><div class="hero-label">آب کمتر، بهره‌وری بیشتر</div>
+      </div>
+    </section>
+
+    <section class="trust-strip" id="benefits">
+      <div><span>✓</span><p><b>انتخاب هوشمند</b><small>محصولات مناسب نیاز شما</small></p></div>
+      <div><span>♧</span><p><b>مناسب باغ و مزرعه</b><small>راهکارهای کاربردی آبیاری</small></p></div>
+      <div><span>↗</span><p><b>خرید آسان</b><small>سبد خرید آزمایشی آنلاین</small></p></div>
+    </section>
+
+    <section class="products-section" id="products">
+      <div class="section-heading">
+        <div><span class="eyebrow">محصولات منتخب</span><h2>تجهیزات مورد نیازت را پیدا کن</h2><p>این محصولات نمونه هستند و قیمت‌ها صرفاً نمایشی‌اند.</p></div>
+        <label class="search-box" id="searchBox"><span>⌕</span><input id="searchInput" type="search" placeholder="جستجوی محصول..." aria-label="جستجوی محصول"></label>
+      </div>
+      <div class="filters" id="filters">
+        <button class="filter active" data-category="همه">همه محصولات</button>
+        <button class="filter" data-category="لوله و اتصالات">لوله و اتصالات</button>
+        <button class="filter" data-category="آبیاری قطره‌ای">آبیاری قطره‌ای</button>
+        <button class="filter" data-category="ابزار و تجهیزات">ابزار و تجهیزات</button>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="banner">
+      <div><span class="eyebrow">برای زمینت انتخاب کن</span><h2>هر قطره آب، یک فرصت است.</h2><p>با انتخاب تجهیزات مناسب، مدیریت آبیاری را ساده‌تر کن.</p></div>
+      <a href="#products" class="light-btn">دیدن محصولات <span>←</span></a>
+      <div class="banner-leaf">🌿</div>
+    </section>
+
+    <section class="newsletter" id="contact">
+      <div><h2>از تیپ‌آگرو باخبر بمان</h2><p>برای تست رابط کاربری، ایمیلت را وارد کن؛ ارسال واقعی انجام نمی‌شود.</p></div>
+      <form id="newsletterForm"><input type="email" placeholder="ایمیل شما" required aria-label="ایمیل شما"><button class="primary-btn" type="submit">عضویت آزمایشی</button></form>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">🌱</span><span><strong>تیپ‌آگرو</strong><small>راهکار هوشمند آبیاری</small></span></a><p>© ۱۴۰۵ تیپ‌آگرو — نسخه نمایشی برای GitHub Pages</p><span class="demo-tag">نسخه آزمایشی</span></footer>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="سبد خرید" aria-hidden="true">
+    <div class="drawer-head"><div><span class="eyebrow">سفارش شما</span><h2>سبد خرید</h2></div><button id="cartClose" class="close-btn" aria-label="بستن">×</button></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-bottom"><div class="total-row"><span>مبلغ کل</span><strong id="cartTotal">۰ تومان</strong></div><button class="primary-btn checkout-btn" id="checkoutBtn">ادامه ثبت سفارش</button><small>پرداخت و ثبت سفارش در این نسخه واقعی نیست.</small></div>
+  </aside>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
