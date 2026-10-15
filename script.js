@@ -1,54 +1,51 @@
-const products = [
- {id:1,name:"لوله پلی‌اتیلن آبیاری",category:"لوله و اتصالات",price:185000,unit:"هر متر",emoji:"🌀",tag:"پرفروش",bg:"#e8f1e6"},
- {id:2,name:"نوار آبیاری قطره‌ای",category:"آبیاری قطره‌ای",price:720000,unit:"رول",emoji:"💧",tag:"پیشنهاد ویژه",bg:"#e4f1f4"},
- {id:3,name:"اتصال زانویی پلی‌اتیلن",category:"لوله و اتصالات",price:95000,unit:"عدد",emoji:"🔩",tag:"",bg:"#f4eee3"},
- {id:4,name:"آبپاش تنظیم‌شونده",category:"آبیاری قطره‌ای",price:245000,unit:"عدد",emoji:"🚿",tag:"",bg:"#e7edf7"},
- {id:5,name:"فیلتر دیسکی آبیاری",category:"ابزار و تجهیزات",price:1250000,unit:"عدد",emoji:"⚙️",tag:"کیفیت بالا",bg:"#f0e9f5"},
- {id:6,name:"شیر کنترل جریان",category:"لوله و اتصالات",price:315000,unit:"عدد",emoji:"🔧",tag:"",bg:"#e9f1e9"},
- {id:7,name:"قطره‌چکان تنظیمی",category:"آبیاری قطره‌ای",price:45000,unit:"عدد",emoji:"💦",tag:"",bg:"#e2f3f1"},
- {id:8,name:"تایمر آبیاری دیجیتال",category:"ابزار و تجهیزات",price:1890000,unit:"عدد",emoji:"⏱️",tag:"هوشمند",bg:"#f5eee2"}
-];
-const fa = n => new Intl.NumberFormat('fa-IR').format(n);
-const toman = n => `${fa(n)} تومان`;
-let selectedCategory = "همه";
-let cart = JSON.parse(localStorage.getItem("tipagri-cart-demo") || "{}");
-const grid = document.getElementById("productGrid");
-const toast = document.getElementById("toast");
-
-function renderProducts(){
- const query = document.getElementById("searchInput").value.trim().toLowerCase();
- const shown = products.filter(p => (selectedCategory==="همه" || p.category===selectedCategory) && p.name.toLowerCase().includes(query));
- if(!shown.length){grid.innerHTML='<div class="empty-state">محصولی با این مشخصات پیدا نشد. عبارت دیگری را امتحان کن.</div>';return;}
- grid.innerHTML = shown.map(p=>`<article class="product-card">
-  <div class="product-art" style="--product-bg:${p.bg}">${p.tag?`<span class="product-tag">${p.tag}</span>`:""}<span class="product-emoji">${p.emoji}</span></div>
-  <div class="product-info"><span class="product-category">${p.category}</span><h3>${p.name}</h3>
-   <div class="product-bottom"><div class="price">${toman(p.price)}<small> / ${p.unit}</small></div><button class="add-btn" data-add="${p.id}" aria-label="افزودن ${p.name} به سبد خرید">+</button></div>
-  </div></article>`).join("");
+const initialProducts=[
+{id:1,name:"لوله پلی‌اتیلن آبیاری",cat:"لوله و اتصالات",price:185000,unit:"هر متر",emoji:"🌀",tag:"پرفروش",bg:"#e8f1e6"},
+{id:2,name:"نوار آبیاری قطره‌ای",cat:"آبیاری قطره‌ای",price:720000,unit:"رول",emoji:"💧",tag:"پیشنهاد ویژه",bg:"#e4f1f4"},
+{id:3,name:"اتصال زانویی پلی‌اتیلن",cat:"لوله و اتصالات",price:95000,unit:"عدد",emoji:"🔩",tag:"",bg:"#f4eee3"},
+{id:4,name:"آبپاش تنظیم‌شونده",cat:"آبیاری قطره‌ای",price:245000,unit:"عدد",emoji:"🚿",tag:"",bg:"#e7edf7"},
+{id:5,name:"فیلتر دیسکی آبیاری",cat:"ابزار و تجهیزات",price:1250000,unit:"عدد",emoji:"⚙️",tag:"کیفیت بالا",bg:"#f0e9f5"},
+{id:6,name:"شیر کنترل جریان",cat:"لوله و اتصالات",price:315000,unit:"عدد",emoji:"🔧",tag:"",bg:"#e9f1e9"},
+{id:7,name:"قطره‌چکان تنظیمی",cat:"آبیاری قطره‌ای",price:45000,unit:"عدد",emoji:"💦",tag:"",bg:"#e2f3f1"},
+{id:8,name:"تایمر آبیاری دیجیتال",cat:"ابزار و تجهیزات",price:1890000,unit:"عدد",emoji:"⏱️",tag:"هوشمند",bg:"#f5eee2"}];
+const read=(key,fallback)=>{try{const x=localStorage.getItem("tipagri-full-"+key);return x?JSON.parse(x):fallback}catch{return fallback}};
+const store=(key,val)=>localStorage.setItem("tipagri-full-"+key,JSON.stringify(val));
+const fa=n=>new Intl.NumberFormat("fa-IR").format(n);
+const money=n=>fa(n)+" تومان";
+let products=read("products",initialProducts),cart=read("cart",{}),users=read("users",[]),orders=read("orders",[]),currentUser=read("currentUser",null),category="همه",adminTab="dashboard",editingId=null,authTab="login";
+const $=id=>document.getElementById(id);
+function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>$("toast").classList.remove("show"),2600)}
+function persist(){store("products",products);store("cart",cart);store("users",users);store("orders",orders);store("currentUser",currentUser)}
+function renderProducts(){let q=$("search").value.trim().toLowerCase(),list=products.filter(p=>(category==="همه"||p.cat===category)&&p.name.toLowerCase().includes(q));if($("sort").value==="low")list.sort((a,b)=>a.price-b.price);if($("sort").value==="high")list.sort((a,b)=>b.price-a.price);
+$("productsGrid").innerHTML=list.length?list.map(p=>`<article class="product"><div class="product-art" style="--pbg:${p.bg}">${p.tag?`<span class="tag">${p.tag}</span>`:""}<button class="wish" data-wish="${p.id}" title="علاقه‌مندی">♡</button><span class="emoji">${p.emoji}</span></div><div class="product-info"><span class="cat">${p.cat}</span><h3>${p.name}</h3><div class="product-bottom"><div class="price">${money(p.price)}<small> / ${p.unit}</small></div><button class="add" data-add="${p.id}" aria-label="افزودن به سبد">+</button></div></div></article>`).join(""):'<div class="empty">محصولی پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کن.</div>'}
+function renderCart(){let count=Object.values(cart).reduce((a,b)=>a+b,0);$("cartCount").textContent=fa(count);let items=products.filter(p=>cart[p.id]);$("cartContent").innerHTML=items.length?items.map(p=>`<div class="cart-line"><div class="mini-art" style="background:${p.bg}">${p.emoji}</div><div class="cart-line-info"><b>${p.name}</b><small>${money(p.price)}</small></div><div class="qty"><button data-qty="${p.id}" data-d="-1">−</button><span>${fa(cart[p.id])}</span><button data-qty="${p.id}" data-d="1">+</button></div></div>`).join(""):'<div class="cart-empty">🛒<br>سبد خرید خالی است.</div>';let total=items.reduce((s,p)=>s+p.price*cart[p.id],0);$("cartTotal").textContent=money(total);persist()}
+function add(id){cart[id]=(cart[id]||0)+1;renderCart();toast("محصول به سبد خرید اضافه شد.")}
+function openDrawer(){$("cartDrawer").classList.add("open");$("backdrop").classList.add("open");$("cartDrawer").setAttribute("aria-hidden","false")}
+function closeDrawer(){$("cartDrawer").classList.remove("open");$("backdrop").classList.remove("open");$("cartDrawer").setAttribute("aria-hidden","true")}
+function openModal(id){$(id).classList.add("open")}
+function closeModals(){$$(".modal-wrap").forEach(x=>x.classList.remove("open"))}
+function $$(s){return [...document.querySelectorAll(s)]}
+function showAuth(tab="login"){authTab=tab;$("authContent").innerHTML=tab==="login"?`<form class="auth-form" id="loginForm"><label>ایمیل<input type="email" name="email" required placeholder="name@example.com"></label><label>رمز عبور<input type="password" name="password" required placeholder="رمز عبور"></label><button class="btn primary full">ورود آزمایشی</button></form>`:`<form class="auth-form" id="registerForm"><label>نام و نام خانوادگی<input name="name" required placeholder="نام شما"></label><label>شماره تماس<input name="phone" required placeholder="09xxxxxxxxx"></label><label>ایمیل<input type="email" name="email" required placeholder="name@example.com"></label><label>رمز عبور<input type="password" name="password" required minlength="4" placeholder="حداقل ۴ کاراکتر"></label><button class="btn primary full">ساخت حساب آزمایشی</button></form>`;$$("#accountModal .tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab))}
+function showAdmin(tab=adminTab){adminTab=tab;$$("#adminModal [data-admin]").forEach(b=>b.classList.toggle("active",b.dataset.admin===tab));let c=$("adminContent");
+if(tab==="dashboard"){c.innerHTML=`<div class="admin-stats"><div class="admin-stat"><small>محصولات</small><b>${fa(products.length)}</b></div><div class="admin-stat"><small>سفارش‌ها</small><b>${fa(orders.length)}</b></div><div class="admin-stat"><small>کاربران ثبت‌نامی</small><b>${fa(users.length)}</b></div></div><p class="hint">آمار فقط از داده‌های ذخیره‌شده در همین مرورگر خوانده می‌شود.</p>`}
+if(tab==="products"){c.innerHTML=`<h3>افزودن محصول آزمایشی</h3><form id="productForm" class="admin-form"><input name="name" required placeholder="نام محصول"><input name="price" required type="number" min="0" placeholder="قیمت به تومان"><select name="cat"><option>آبیاری قطره‌ای</option><option>لوله و اتصالات</option><option>ابزار و تجهیزات</option></select><input name="unit" placeholder="واحد (مثلاً عدد)" value="عدد"><input name="emoji" placeholder="ایموجی محصول" value="🌱"><input name="tag" placeholder="برچسب (اختیاری)"><button class="btn primary">افزودن محصول</button></form><div class="admin-table-wrap"><table><thead><tr><th>محصول</th><th>دسته‌بندی</th><th>قیمت</th><th>عملیات</th></tr></thead><tbody>${products.map(p=>`<tr><td>${p.emoji} ${p.name}</td><td>${p.cat}</td><td>${money(p.price)}</td><td><button class="small-btn danger" data-delete="${p.id}">حذف</button></td></tr>`).join("")}</tbody></table></div>`}
+if(tab==="orders"){c.innerHTML=orders.length?`<div class="admin-table-wrap"><table><thead><tr><th>شماره</th><th>مشتری</th><th>تلفن</th><th>مبلغ</th><th>وضعیت</th></tr></thead><tbody>${orders.map(o=>`<tr><td>${o.id}</td><td>${o.name}</td><td>${o.phone}</td><td>${money(o.total)}</td><td><select data-status="${o.id}">${["در انتظار بررسی","تأییدشده","ارسال‌شده","لغوشده"].map(s=>`<option ${o.status===s?"selected":""}>${s}</option>`).join("")}</select></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">هنوز سفارشی ثبت نشده است.</div>'}
+if(tab==="users"){c.innerHTML=users.length?`<div class="admin-table-wrap"><table><thead><tr><th>نام</th><th>ایمیل</th><th>شماره تماس</th></tr></thead><tbody>${users.map(u=>`<tr><td>${u.name}</td><td>${u.email}</td><td>${u.phone||"—"}</td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">هنوز کاربری ثبت‌نام نکرده است.</div>'}
 }
-function saveCart(){localStorage.setItem("tipagri-cart-demo",JSON.stringify(cart));renderCart();}
-function addToCart(id){cart[id]=(cart[id]||0)+1;saveCart();showToast("محصول به سبد خرید اضافه شد.");}
-function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];saveCart();}
-function renderCart(){
- const count=Object.values(cart).reduce((a,b)=>a+b,0);
- document.getElementById("cartCount").textContent=fa(count);
- const items=products.filter(p=>cart[p.id]);
- const container=document.getElementById("cartItems");
- if(!items.length) container.innerHTML='<div class="cart-empty">🛒<br>سبد خریدت هنوز خالی است.</div>';
- else container.innerHTML=items.map(p=>`<div class="cart-line"><div class="mini-art" style="background:${p.bg}">${p.emoji}</div><div class="cart-line-info"><b>${p.name}</b><small>${toman(p.price)}</small></div><div class="quantity"><button data-qty="${p.id}" data-delta="-1" aria-label="کم کردن">−</button><span>${fa(cart[p.id])}</span><button data-qty="${p.id}" data-delta="1" aria-label="زیاد کردن">+</button></div></div>`).join("");
- const total=items.reduce((sum,p)=>sum+p.price*cart[p.id],0);
- document.getElementById("cartTotal").textContent=toman(total);
-}
-function showToast(message){toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2500);}
-function openCart(){document.getElementById("cartDrawer").classList.add("open");document.getElementById("overlay").classList.add("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","false");}
-function closeCart(){document.getElementById("cartDrawer").classList.remove("open");document.getElementById("overlay").classList.remove("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","true");}
-document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;selectedCategory=b.dataset.category;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));renderProducts();});
-document.getElementById("searchInput").addEventListener("input",renderProducts);
-grid.addEventListener("click",e=>{const b=e.target.closest("[data-add]");if(b)addToCart(Number(b.dataset.add));});
-document.getElementById("cartItems").addEventListener("click",e=>{const b=e.target.closest("[data-qty]");if(b)changeQty(Number(b.dataset.qty),Number(b.dataset.delta));});
-document.getElementById("cartOpen").addEventListener("click",openCart);
-document.getElementById("cartClose").addEventListener("click",closeCart);
-document.getElementById("overlay").addEventListener("click",closeCart);
-document.getElementById("checkoutBtn").addEventListener("click",()=>{if(!Object.keys(cart).length){showToast("ابتدا محصولی به سبد خرید اضافه کن.");return;}showToast("این نسخه نمایشی است؛ پرداخت واقعی فعال نیست.");});
-document.getElementById("newsletterForm").addEventListener("submit",e=>{e.preventDefault();showToast("ثبت آزمایشی انجام شد؛ ایمیلی ارسال نشده است.");e.target.reset();});
-document.getElementById("searchToggle").addEventListener("click",()=>{document.getElementById("searchInput").focus();document.getElementById("products").scrollIntoView({behavior:"smooth"});});
+$("productsGrid").addEventListener("click",e=>{let a=e.target.closest("[data-add]"),w=e.target.closest("[data-wish]");if(a)add(+a.dataset.add);if(w)toast("علاقه‌مندی در این نسخه نمایشی است.")});
+$("categories").addEventListener("click",e=>{let b=e.target.closest("[data-cat]");if(!b)return;category=b.dataset.cat;$$("#categories .chip").forEach(x=>x.classList.toggle("active",x===b));renderProducts()});
+$("search").addEventListener("input",renderProducts);$("sort").addEventListener("change",renderProducts);
+$("cartBtn").onclick=openDrawer;$("backdrop").onclick=closeDrawer;$$("[data-close]").forEach(b=>b.onclick=()=>{closeDrawer();closeModals()});
+$("checkout").onclick=()=>{if(!Object.keys(cart).length){toast("سبد خرید خالی است.");return}closeDrawer();openModal("checkoutModal")};
+$("checkoutForm").onsubmit=e=>{e.preventDefault();let f=new FormData(e.target),items=products.filter(p=>cart[p.id]).map(p=>({id:p.id,name:p.name,price:p.price,qty:cart[p.id]})),total=items.reduce((s,p)=>s+p.price*p.qty,0);let order={id:"TA-"+Date.now().toString().slice(-6),name:f.get("name"),phone:f.get("phone"),address:f.get("address"),note:f.get("note"),items,total,status:"در انتظار بررسی",date:new Date().toLocaleDateString("fa-IR")};orders.unshift(order);cart={};persist();renderCart();closeModals();e.target.reset();toast("سفارش آزمایشی ثبت شد: "+order.id)};
+$("accountBtn").onclick=()=>{showAuth(currentUser?"login":"login");if(currentUser){$("authContent").innerHTML=`<div class="empty">سلام ${currentUser.name}!<br>شما در این مرورگر وارد شده‌اید.<br><button class="small-btn danger" id="logout">خروج</button></div>`;}openModal("accountModal")};$("heroLogin").onclick=()=>$("accountBtn").click();
+$("authContent").addEventListener("submit",e=>{e.preventDefault();let f=new FormData(e.target);if(e.target.id==="registerForm"){let email=f.get("email").toLowerCase();if(users.some(u=>u.email===email)){toast("این ایمیل قبلاً ثبت شده است.");return}currentUser={name:f.get("name"),phone:f.get("phone"),email,password:f.get("password")};users.push(currentUser);persist();closeModals();toast("حساب آزمایشی ساخته شد.");}else if(e.target.id==="loginForm"){let email=f.get("email").toLowerCase(),u=users.find(u=>u.email===email&&u.password===f.get("password"));if(!u){toast("حساب آزمایشی پیدا نشد؛ ابتدا ثبت‌نام کن.");return}currentUser=u;persist();closeModals();toast("ورود آزمایشی موفق بود.");}});
+$("authContent").addEventListener("click",e=>{if(e.target.id==="logout"){currentUser=null;persist();closeModals();toast("خارج شدی.")}});
+$("accountModal").addEventListener("click",e=>{let b=e.target.closest("[data-tab]");if(b)showAuth(b.dataset.tab)});
+$("contactForm").onsubmit=e=>{e.preventDefault();e.target.reset();toast("پیام آزمایشی ثبت شد؛ به سرور ارسال نشده است.")};
+$("adminOpen").onclick=()=>{showAdmin("dashboard");openModal("adminModal")};$("adminOpenMobile").onclick=()=>{showAdmin("dashboard");openModal("adminModal");$("mobileMenu").classList.add("hidden")};
+$("menuBtn").onclick=()=>$("mobileMenu").classList.toggle("hidden");
+$("adminModal").addEventListener("click",e=>{let t=e.target.closest("[data-admin]");if(t)showAdmin(t.dataset.admin);let d=e.target.closest("[data-delete]");if(d){products=products.filter(p=>p.id!==+d.dataset.delete);persist();renderProducts();showAdmin("products");toast("محصول از نمونه محلی حذف شد.")}});
+$("adminContent").addEventListener("submit",e=>{if(e.target.id!=="productForm")return;e.preventDefault();let f=new FormData(e.target);products.unshift({id:Math.max(0,...products.map(p=>p.id))+1,name:f.get("name"),cat:f.get("cat"),price:+f.get("price"),unit:f.get("unit")||"عدد",emoji:f.get("emoji")||"🌱",tag:f.get("tag"),bg:"#e8f1e6"});persist();renderProducts();showAdmin("products");toast("محصول آزمایشی اضافه شد.")});
+$("adminContent").addEventListener("change",e=>{if(!e.target.dataset.status)return;let o=orders.find(o=>o.id===e.target.dataset.status);if(o){o.status=e.target.value;persist();toast("وضعیت سفارش در مرورگر تغییر کرد.")}});
+window.addEventListener("load",()=>setTimeout(()=>$("loading").classList.add("done"),500));
 renderProducts();renderCart();
